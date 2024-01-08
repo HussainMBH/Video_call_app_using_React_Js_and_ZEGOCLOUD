@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 export function generateToken(userId, roomId, userName) {
     return fetch(
       `https://choui-prebuilt.herokuapp.com/access_token?userId=${userId}&userName=${userName}&roomId=${roomId}&expired_ts=7200`,
@@ -66,3 +67,38 @@ export function generateToken(userId, roomId, userName) {
   
     return names[Math.round(Math.random() * names.length)];
   }
+=======
+export function generateToken(userId,roomId,userName){
+    return fetch(`https://choui-prebuilt.herokuapp.com/access_token?userId=${userId}&userName=${userName}&roomId=${roomId}&expired_ts=7200`).then((res)=>res.json());
+
+}
+
+export function randomId(len){
+    let result = "";
+    if(result) return result;
+    var chars = "12345qwertyuiopasdfgh67890jklmnbvcxzMNBVCXASDQWERTYHGFUIOLKJP";
+    var maxPos = chars.length;
+    len = len || 5;
+    for (let i=0; i<len; i++){
+        result += chars.charAt(Math.floor(Math.random() * maxPos));
+    }
+
+    return result;
+}
+
+export function getRandomName(){
+    const names = [
+        "Mohamed",
+        "Bahir",
+        "Hussain",
+        "Yousuf",
+        "Zakariya",
+        "Younus",
+        "Yahya",
+        "Saaliha",
+        "Hajar"
+    ]
+
+    return names[Math.round(Math.random()*names.length)];
+}
+>>>>>>> 9e83a1a (First Commit)

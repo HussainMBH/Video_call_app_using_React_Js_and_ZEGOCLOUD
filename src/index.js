@@ -10,4 +10,7 @@ root.render(
     <App />
   </React.StrictMode>
 );
+<<<<<<< HEAD
 
+=======
+>>>>>>> 9e83a1a (First Commit)
