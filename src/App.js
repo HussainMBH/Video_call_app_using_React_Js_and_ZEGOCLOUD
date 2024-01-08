@@ -1,25 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import React, { useState, useRef, useEffect } from "react";
+import { generateToken, getRandomName, randomId } from "./util";
+import { ZegoUIKitPrebuilt } from "@zegocloud/zego-uikit-prebuilt";
+import "./App.css";
 
-function App() {
+const App = () => {
+  const myMeeting = useRef();
+  const [token, setToken] = useState("");
+
+  useEffect(() => {
+    const getData = async () => {
+      let { token } = await generateToken(randomId(5), "3555", getRandomName());
+      setToken(token);
+    };
+
+    getData();
+  }, []);
+
+  useEffect(() => {
+    if (token && myMeeting.current) {
+      const inst = ZegoUIKitPrebuilt.create(token);
+      inst.joinRoom({
+        container: myMeeting.current,
+      });
+    }
+  }, [token, myMeeting.current]);
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+      <div ref={myMeeting}></div>
     </div>
   );
-}
+};
 
 export default App;
